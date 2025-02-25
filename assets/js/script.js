@@ -9,13 +9,16 @@ const handleSubmit = (e) => {
     return;
   }
 
-  todo = [...todo, { id: todo.length + 1, text: value }];
+  todo = [...todo, { id: todo.length + 1, status: "pending", text: value }];
+
+  e.target.reset();
+
   renderTodo();
 };
 
 const renderTodo = () => {
   const listTodo = document.getElementById("list-todo");
-
+  console.log(todo);
   const element = todo
     .map(
       (list) =>
@@ -25,16 +28,23 @@ const renderTodo = () => {
                   ${list.text}
                 </p>
                 <div class="list__content__item__action">
-                  <button class="list__content__item__action__el">
-                    <img
-                      src="./assets/images/check-square.svg"
-                      alt="complete"
-                      class=""
-                    />
-                  </button>
-                  <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
+                ${list.status !== "completed" ?
+                    `<button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
+                      <img
+                        src="./assets/images/check-square.svg"
+                        alt="complete"
+                        class=""
+                      />
+                    </button>
+                    <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
+                      <img src="./assets/images/trash.svg" alt="trash" />
+                    </button>`
+                    
+                    :
+                    `<button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
                     <img src="./assets/images/trash.svg" alt="trash" />
-                  </button>
+                  </button>`
+                }
                 </div>
         </li>`
     )
@@ -43,10 +53,47 @@ const renderTodo = () => {
   listTodo.innerHTML = element;
 };
 
+const handleCompleted = (id) => {
+  todo = todo.map((check) => {
+    if (check.id === id) {
+      return {
+        ...check,
+        status: "completed",
+      };
+    } else {
+      return check;
+    }
+  });
+
+  renderTodo()
+};
+
 const handleDelete = (id) => {
   todo = todo.filter((check) => {
+    alert(`${check.text} berhasil di hapus`);
     return check.id !== id;
   });
 
   renderTodo();
+};
+
+let isNightMode = false;
+const handleMode = () => {
+  isNightMode = !isNightMode;
+
+  switchIconMode();
+};
+
+const switchIconMode = () => {
+  const iconMode = document.getElementById("icon__mode");
+
+  if (iconMode) {
+    if (isNightMode) {
+      iconMode.src = "./assets/images/light.svg";
+      document.querySelector(".todo").style.backgroundColor = "black";
+    } else {
+      iconMode.src = "./assets/images/night.svg";
+      document.querySelector(".todo").style.backgroundColor = "#2361cc";
+    }
+  }
 };

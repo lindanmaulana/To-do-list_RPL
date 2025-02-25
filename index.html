@@ -12,6 +12,15 @@
       <section class="todo">
         <div class="container">
           <h1 class="title">To-Do-List</h1>
+          <button onclick="handleMode()" class="btn__mode">
+            <img
+              id="icon__mode"
+              src="./assets/images/night.svg"
+              alt="night-mode"
+              width="40"
+              height="32"
+            />
+          </button>
           <div class="todo__content">
             <form onsubmit="handleSubmit(event)" class="todo__content__form">
               <input
@@ -20,14 +29,19 @@
                 class="todo__content__form__input"
                 name="todo"
               />
-              <button type="submit" class="todo__content__form__action">Add</button>
+              <button type="submit" class="todo__content__form__action">
+                Add
+              </button>
             </form>
             <ul class="list__content" id="list-todo">
               <li class="list__content__item notfound">
-                <p class="list__content__item__text">
-                  Catatan kosong
-                </p>
-                <img src="./assets/images/xmark.svg" alt="xmark" width="25" height="25">
+                <p class="list__content__item__text">Catatan kosong</p>
+                <img
+                  src="./assets/images/xmark.svg"
+                  alt="xmark"
+                  width="25"
+                  height="25"
+                />
               </li>
             </ul>
           </div>
