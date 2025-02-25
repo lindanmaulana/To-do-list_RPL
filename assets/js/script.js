@@ -28,8 +28,9 @@ const renderTodo = () => {
                   ${list.text}
                 </p>
                 <div class="list__content__item__action">
-                ${list.status !== "completed" ?
-                    `<button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
+                ${
+                  list.status !== "completed"
+                    ? `<button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
                       <img
                         src="./assets/images/check-square.svg"
                         alt="complete"
@@ -39,9 +40,7 @@ const renderTodo = () => {
                     <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
                       <img src="./assets/images/trash.svg" alt="trash" />
                     </button>`
-                    
-                    :
-                    `<button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
+                    : `<button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
                     <img src="./assets/images/trash.svg" alt="trash" />
                   </button>`
                 }
@@ -65,12 +64,11 @@ const handleCompleted = (id) => {
     }
   });
 
-  renderTodo()
+  renderTodo();
 };
 
 const handleDelete = (id) => {
   todo = todo.filter((check) => {
-    alert(`${check.text} berhasil di hapus`);
     return check.id !== id;
   });
 
