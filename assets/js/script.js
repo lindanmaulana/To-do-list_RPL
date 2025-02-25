@@ -1,28 +1,28 @@
-let todo = ["hello world"];
+let todo = [];
 
 const handleSubmit = (e) => {
   e.preventDefault();
   const value = e.target.todo.value;
 
-  if(value === "") {
-    alert("Catatan baru tidak boleh kosong!")
+  if (value === "") {
+    alert("Catatan baru tidak boleh kosong!");
     return;
   }
 
-  todo.push(value);
-
+  todo = [...todo, { id: todo.length + 1, text: value }];
   renderTodo();
 };
 
 const renderTodo = () => {
   const listTodo = document.getElementById("list-todo");
 
-  listTodo.innerHTML = todo.map(
-    (list) =>
-      `
+  const element = todo
+    .map(
+      (list) =>
+        `
          <li class="list__content__item">
                 <p class="list__content__item__text">
-                  ${list}
+                  ${list.text}
                 </p>
                 <div class="list__content__item__action">
                   <button class="list__content__item__action__el">
@@ -32,10 +32,21 @@ const renderTodo = () => {
                       class=""
                     />
                   </button>
-                  <button class="list__content__item__action__el">
+                  <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
                     <img src="./assets/images/trash.svg" alt="trash" />
                   </button>
                 </div>
         </li>`
-  ).join(" ");
+    )
+    .join(" ");
+
+  listTodo.innerHTML = element;
+};
+
+const handleDelete = (id) => {
+  todo = todo.filter((check) => {
+    return check.id !== id;
+  });
+
+  renderTodo();
 };

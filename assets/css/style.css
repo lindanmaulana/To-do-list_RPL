@@ -34,7 +34,7 @@
 }
 
 .todo__content {
-  min-width: 300px;
+  min-width: 340px;
   background-color: white;
   padding: 30px 20px;
   border-radius: 6px;
@@ -50,6 +50,7 @@
 
 .todo__content__form__input {
   width: 100%;
+  height: 40px;
   padding: 5px 10px;
   border-radius: 4px;
   outline: none;
@@ -61,6 +62,8 @@
 }
 
 .todo__content__form__action {
+  width: 25%;
+  height: 40px;
   background-color: var(--primary);
   border-radius: 4px;
   color: white;
@@ -79,8 +82,9 @@
 
 .list__content__item {
   width: 100%;
+  height: 44px;
   display: flex;
-  align-items: center; /* Pastikan item tetap sejajar */
+  align-items: center;
   justify-content: space-between;
   padding: 10px;
   background-color: var(--secondary);
@@ -119,6 +123,6 @@
 }
 
 .list__content__item__action__el img {
-  width: 12px;
-  height: 12px;
+  width: 18px;
+  height: 18px;
 }
