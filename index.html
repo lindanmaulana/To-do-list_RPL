@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section class="todo">
+        <div class="container">
+          <h1 class="title">To-Do-List</h1>
+          <div class="todo__content">
+            <form onsubmit="handleSubmit(event)" class="todo__content__form">
+              <input
+                type="text"
+                placeholder="Tambah catatan baru..."
+                class="todo__content__form__input"
+                name="todo"
+              />
+              <button type="submit" class="todo__content__form__action">Add</button>
+            </form>
+            <ul class="list__content" id="list-todo">
+              <li class="list__content__item notfound">
+                <p class="list__content__item__text">
+                  Catatan kosong
+                </p>
+                <img src="./assets/images/xmark.svg" alt="xmark" width="25" height="25">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+  </body>
+</html>

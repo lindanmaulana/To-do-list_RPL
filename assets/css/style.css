@@ -1,0 +1,124 @@
+/* css reset start */
+*,body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* css reset end */
+
+:root {
+  --primary: #2361cc;
+  --secondary: #c5e0e5;
+  --third: #1d1ba3;
+}
+
+.todo {
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--primary);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  color: white;
+}
+
+.todo__content {
+  min-width: 300px;
+  background-color: white;
+  padding: 30px 20px;
+  border-radius: 6px;
+}
+
+.todo__content__form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.todo__content__form__input {
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid var(--primary);
+}
+
+.todo__content__form__input:focus {
+  border: 2px solid var(--primary);
+}
+
+.todo__content__form__action {
+  background-color: var(--primary);
+  border-radius: 4px;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+}
+
+/* list content start */
+.list__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.list__content__item {
+  width: 100%;
+  display: flex;
+  align-items: center; /* Pastikan item tetap sejajar */
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--secondary);
+  list-style-type: none;
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.notfound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+}
+
+.list__content__item__text {
+  font-size: 14px;
+}
+
+.list__content__item__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.list__content__item__action__el {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--third);
+  border-radius: 3px;
+  padding: 6px 8px;
+  border: none;
+  color: white;
+}
+
+.list__content__item__action__el img {
+  width: 12px;
+  height: 12px;
+}
