@@ -16,42 +16,6 @@ const handleSubmit = (e) => {
   renderTodo();
 };
 
-const renderTodo = () => {
-  const listTodo = document.getElementById("list-todo");
-  console.log(todo);
-  const element = todo
-    .map(
-      (list) =>
-        `
-         <li class="list__content__item">
-                <p class="list__content__item__text">
-                  ${list.text}
-                </p>
-                <div class="list__content__item__action">
-                ${
-                  list.status !== "completed"
-                    ? `<button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
-                      <img
-                        src="./assets/images/check-square.svg"
-                        alt="complete"
-                        class=""
-                      />
-                    </button>
-                    <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
-                      <img src="./assets/images/trash.svg" alt="trash" />
-                    </button>`
-                    : `<button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
-                    <img src="./assets/images/trash.svg" alt="trash" />
-                  </button>`
-                }
-                </div>
-        </li>`
-    )
-    .join(" ");
-
-  listTodo.innerHTML = element;
-};
-
 const handleCompleted = (id) => {
   todo = todo.map((check) => {
     if (check.id === id) {
@@ -80,6 +44,44 @@ const handleMode = () => {
   isNightMode = !isNightMode;
 
   switchIconMode();
+};
+
+const renderTodo = () => {
+  const listTodo = document.getElementById("list-todo");
+  console.log(todo);
+  const element = todo
+    .map(
+      (list) =>
+        `
+         <li class="list__content__item">
+                <p class="list__content__item__text">
+                  ${list.text}
+                </p>
+                <div class="list__content__item__action">
+                ${
+                  list.status !== "completed"
+                    ? ` <button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
+                            <img
+                                src="./assets/images/check-square.svg"
+                                alt="complete"
+                                class=""
+                            />
+                        </button>
+                        <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
+                            <img src="./assets/images/trash.svg" alt="trash" />
+                        </button>`
+                    : 
+                    `   <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
+                            <img src="./assets/images/trash.svg" alt="trash" />
+                        </button>
+                    `
+                }
+                </div>
+        </li>`
+    )
+    .join(" ");
+
+  listTodo.innerHTML = element;
 };
 
 const switchIconMode = () => {
