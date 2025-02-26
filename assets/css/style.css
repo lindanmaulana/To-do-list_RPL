@@ -120,11 +120,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
   background-color: var(--secondary);
   list-style-type: none;
   border-radius: 4px;
-  padding: 3px 12px;
+  padding: 6px;
 }
 
 .notfound {
@@ -135,10 +134,12 @@ header {
 }
 
 .list__content__item__text {
-  height: 48px;
+  display: grid;
+  align-items: center;
+  height: 100%;
   font-size: 14px;
   max-width: 200px;
-  overflow-y: auto;
+  overflow-y: auto; 
 }
 
 .text__notfound {
