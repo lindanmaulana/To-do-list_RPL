@@ -13,7 +13,7 @@ const handleSubmit = (e) => {
 
   e.target.reset();
 
-  renderTodo();
+  renderTodo()
 };
 
 const handleCompleted = (id) => {
@@ -46,21 +46,64 @@ const handleMode = () => {
   switchIconMode();
 };
 
+let edit = {
+  id: null,
+  active: false
+}
+
+const handleEdit = (e, id) => {
+  const value = e.target.value
+
+  todo = todo.map((task) => {
+
+    if(task.id === id) {
+      return {
+        ...task,
+        text: value
+      }
+    } else {
+      return {
+        ...task
+      }
+    }
+  })
+
+  edit = {
+    id: null,
+    active: false
+  }
+
+  renderTodo()
+}
+
+const handleTaskEdit = (id) => {
+  edit = {
+    id: id,
+    active: true
+  }
+
+  renderTodo()
+}
 const renderTodo = () => {
   const listTodo = document.getElementById("list-todo");
   console.log(todo);
   const element = todo
     .map(
       (list) =>
-        `
+        ` 
          <li class="list__content__item">
-                <p class="list__content__item__text">
-                  ${list.text}
-                </p>
+                <textarea type="text" class="list__content__item__text" name="task" onchange="handleEdit(event, ${list.id})" ${edit.id === list.id && edit.active === true ? "" :  "readonly" }>${list.text}</textarea>
                 <div class="list__content__item__action">
                 ${
                   list.status !== "completed"
-                    ? ` <button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
+                    ? ` <button onclick="handleTaskEdit(${list.id})" class="list__content__item__action__el btn-complete">
+                            <img
+                                src="./assets/images/edit.svg"
+                                alt="complete"
+                                class=""
+                            />
+                        </button>
+                        <button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
                             <img
                                 src="./assets/images/check-square.svg"
                                 alt="complete"

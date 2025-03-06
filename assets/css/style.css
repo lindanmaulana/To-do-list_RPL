@@ -68,7 +68,7 @@ header {
 }
 
 .todo__content {
-  min-width: 340px;
+  min-width: 380px;
   background-color: white;
   padding: 30px 20px;
   border-radius: 6px;
@@ -134,6 +134,9 @@ header {
 }
 
 .list__content__item__text {
+  width: 100%;
+  outline: none;
+  padding: 0px 2px;
   display: grid;
   align-items: center;
   height: 100%;
