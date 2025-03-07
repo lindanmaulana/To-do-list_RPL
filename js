@@ -1,30 +1,47 @@
 let todo = [];
+let todoStatus = []
 let filter = ""
 
 const handleModeTask = (id) => {
-  const modes = {
-    1: document.querySelector(".mode__all"),
-    2: document.querySelector(".mode__pending"),
-    3: document.querySelector(".mode__complete"),
-  };
+  const modeAll = document.querySelector(".mode__all")
+  const modePending = document.querySelector(".mode__pending")
+  const modeComplete = document.querySelector(".mode__complete")
 
-  Object.values(modes).forEach(el => el.classList.remove("modeActive"));
-
-  if (modes[id]) {
-    modes[id].classList.add("modeActive");
+  switch (Number(id)) {
+    case 1:
+      modeAll.classList.add("modeActive")
+      modePending.classList.remove("modeActive")
+      modeComplete.classList.remove("modeActive")
+      todoStatus = []
+      filter = ""
+      break;
+    case 2:
+      modePending.classList.add("modeActive")
+      modeAll.classList.remove("modeActive")
+      modeComplete.classList.remove("modeActive")
+      const taskPending = todo.filter(task => task.status === "pending")
+      todoStatus = taskPending
+      filter = "pending"
+      break;
+    case 3:
+      modeComplete.classList.add("modeActive")
+      modeAll.classList.remove("modeActive")
+      modePending.classList.remove("modeActive")
+      const taskCompleted = todo.filter(task => task.status === "completed")
+      todoStatus = taskCompleted
+      filter = "completed"
+      break;
+    default:
+      modeComplete.classList.remove("modeActive")
+      modeAll.classList.remove("modeActive")
+      modePending.classList.remove("modeActive")
+      todoStatus = []
+      filter = ""
+      break;
   }
 
-  const filterMap = {
-    1: "",
-    2: "pending",
-    3: "completed",
-  };
-
-  filter = filterMap[id] || "";
-
-  renderTodo();
-};
-
+  renderTodo()
+}
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -117,9 +134,23 @@ const handleTaskEdit = (id) => {
 
 const renderTodo = () => {
   const listTodo = document.getElementById("list-todo");
-  const tasks = filter ? todo.filter(task => task.status === filter) : todo;
+  console.log(todo);
 
-  let element = tasks.length > 0 ? tasks.map(
+  let element;
+  if (todoStatus.length < 0 && filter !== "")  {
+    element =
+        ` <li class="list__content__item notfound">
+                <p class="list__content__item__text text__notfound">Catatan kosong</p>
+                <img
+                class="list__content__item__notfound"
+                  src="./assets/images/xmark.svg"
+                  alt="xmark"
+                  width="25"
+                  height="25"
+                />
+            </li>`
+  } else if(todoStatus.length > 0 && filter !== "") {
+    element = todoStatus.map(
       (list) =>
         ` 
          <li class="list__content__item">
@@ -153,16 +184,44 @@ const renderTodo = () => {
                 </div>
         </li>`
     )
-    .join(" ") : ` <li class="list__content__item notfound">
-                <p class="list__content__item__text text__notfound">Catatan kosong</p>
-                <img
-                class="list__content__item__notfound"
-                  src="./assets/images/xmark.svg"
-                  alt="xmark"
-                  width="25"
-                  height="25"
-                />
-              </li>`;
+    .join(" ");
+  }  else {
+    element = todo.map(
+      (list) =>
+        ` 
+         <li class="list__content__item">
+                <textarea id="task__text" type="text" class="list__content__item__text" name="task" onchange="handleEdit(event, ${list.id})" ${edit.id === list.id && edit.active === true ? "" :  "readonly" }>${list.text}</textarea>
+                <div class="list__content__item__action">
+                ${
+                  list.status !== "completed"
+                    ? ` <button onclick="handleTaskEdit(${list.id})" class="list__content__item__action__el btn-complete">
+                            <img
+                                src="./assets/images/edit.svg"
+                                alt="complete"
+                                class=""
+                            />
+                        </button>
+                        <button onclick="handleCompleted(${list.id})" class="list__content__item__action__el btn-complete">
+                            <img
+                                src="./assets/images/check-square.svg"
+                                alt="complete"
+                                class=""
+                            />
+                        </button>
+                        <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
+                            <img src="./assets/images/trash.svg" alt="trash" />
+                        </button>`
+                    : 
+                    `   <button onclick="handleDelete(${list.id})" class="list__content__item__action__el btn-delete">
+                            <img src="./assets/images/trash.svg" alt="trash" />
+                        </button>
+                    `
+                }
+                </div>
+        </li>`
+    )
+    .join(" ");
+  }
   
 
     setTimeout(() => {
@@ -175,7 +234,6 @@ const renderTodo = () => {
 
   listTodo.innerHTML = element;
 };
-
 
 const switchIconMode = () => {
   const iconMode = document.getElementById("icon__mode");

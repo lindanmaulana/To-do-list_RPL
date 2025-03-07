@@ -79,7 +79,7 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 4px;
 }
 
 .todo__content__form__input {
@@ -105,6 +105,29 @@ header {
   border: none;
   padding: 5px 10px;
 }
+
+/* todo-content-action start */
+.todo__content__action {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 3px;
+  margin-bottom: 30px;
+}
+
+.todo__content__action button {
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+}
+
+.modeActive {
+  background-color: green;
+  color: white;
+  box-shadow: 2px 2px 2px 1px black;
+}
+/* todo-content-action end */
 
 /* list content start */
 .list__content {
@@ -137,12 +160,17 @@ header {
   width: 100%;
   outline: none;
   padding: 0px 2px;
-  display: grid;
+  display: flex;
   align-items: center;
   height: 100%;
   font-size: 14px;
   max-width: 200px;
   overflow-y: auto; 
+  border: none;
+  background-color: transparent;
+}
+.editable {
+  border: 2px solid red;
 }
 
 .text__notfound {

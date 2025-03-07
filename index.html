@@ -35,6 +35,11 @@
                 Add
               </button>
             </form>
+            <div class="todo__content__action">
+              <button onclick="handleModeTask(1)" class="todo__content__action__all mode__all modeActive">All</button>
+              <button onclick="handleModeTask(2)" class="todo__content__action__pending mode__pending">Pending</button>
+              <button onclick="handleModeTask(3)" class="todo__content__action__complete mode__complete">Complete</button>
+            </div>
             <ul class="list__content" id="list-todo">
               <li class="list__content__item notfound">
                 <p class="list__content__item__text text__notfound">Catatan kosong</p>
