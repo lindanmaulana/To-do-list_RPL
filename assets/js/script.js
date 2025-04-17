@@ -258,3 +258,5 @@ const renderCodeHtml = () => {
     </html>
   `
 }
+
+renderCodeHtml()
